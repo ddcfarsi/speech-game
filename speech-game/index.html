@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بازی گفتار - Talk & Type</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- صفحه انتخاب سطح -->
+    <div id="level-selection-screen" class="screen active">
+        <div class="container">
+            <h1>بازی گفتار</h1>
+            <p>لطفاً سطح دشواری را انتخاب کنید:</p>
+            <div class="level-buttons">
+                <button class="level-btn" data-level="1">سطح 1 (آسان)</button>
+                <button class="level-btn" data-level="2">سطح 2 (متوسط)</button>
+                <button class="level-btn" data-level="3">سطح 3 (سخت)</button>
+            </div>
+            <button id="manage-words-btn" class="control-btn secondary">مدیریت کلمات</button>
+            <button id="about-btn-main" class="control-btn secondary">درباره من</button>
+        </div>
+    </div>
+
+    <!-- صفحه اصلی بازی -->
+    <div id="game-screen" class="screen">
+        <div class="game-container">
+            <header class="game-header">
+                <h1>بازی گفتار</h1>
+                <div class="score-board">
+                    <span>امتیاز: <span id="score">0</span></span>
+                    <span>سطح: <span id="level">1</span></span>
+                </div>
+            </header>
+
+            <main class="game-main">
+                <!-- افکت تشویقی -->
+                <div id="encouragement-effect"></div>
+                <div class="word-display" id="word-display">آماده شوید!</div>
+                <div class="feedback" id="feedback"></div>
+                <div class="typed-words" id="typed-words"></div>
+            </main>
+
+            <footer class="game-controls">
+                <button id="start-btn" class="control-btn">شروع تمرین</button>
+                <button id="back-to-levels-btn" class="control-btn secondary">بازگشت</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- صفحه مدیریت کلمات -->
+    <div id="word-manager-screen" class="screen">
+        <div class="container">
+            <h2>مدیریت کلمات</h2>
+            <div class="word-manager-content">
+                <div class="level-selector">
+                    <label for="manager-level-select">سطح:</label>
+                    <select id="manager-level-select">
+                        <option value="1">سطح 1</option>
+                        <option value="2">سطح 2</option>
+                        <option value="3">سطح 3</option>
+                    </select>
+                </div>
+                <div class="word-list" id="word-list"></div>
+                <div class="add-word-form">
+                    <input type="text" id="new-word-input" placeholder="کلمه جدید را وارد کنید...">
+                    <button id="add-word-btn">افزودن</button>
+                </div>
+            </div>
+            <button id="back-to-levels-from-manager" class="control-btn secondary">بازگشت</button>
+        </div>
+    </div>
+
+    <!-- مودال درباره من -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2>درباره من</h2>
+            <p>این بازی توسط **شریفی هروی** طراحی و توسعه داده شده است.</p>
+            <p>هدف از این برنامه، کمک به بهبود روانی کلام و تمرین تلفظ کلمات به روشی سرگرم‌کننده و شخصی‌سازی‌شده است.</p>
+            <div class="social-links">
+                <a href="mailto:sharifi.heravi@gmail.com" target="_blank">E-mail</a>
+                <a href="https://www.youtube.com/ddcfarsi" target="_blank">YouTube</a>
+                <a href="https://www.instagram.com/sharifi_heravi" target="_blank">Instagram</a>
+            </div>
+            <p class="copyright">Copyright © 2025 Sharifi Heravi. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <!-- ثبت Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered.'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>
